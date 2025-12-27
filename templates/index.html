@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estate AI Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        /* Force Input to be clickable */
+        #user-input { 
+            -webkit-user-select: text !important;
+            user-select: text !important;
+            pointer-events: auto !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen">
+
+    <script id="cities-data" type="application/json">{{ cities | tojson | safe }}</script>
+    <script id="map-data" type="application/json">{{ cities_map | tojson | safe }}</script>
+
+    <div class="max-w-6xl mx-auto py-12 px-4">
+        <div id="main-layout" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <div id="form-container" class="lg:col-span-12 bg-white rounded-3xl p-10 shadow-xl border border-slate-200 transition-all duration-500">
+                <h1 class="text-3xl font-black mb-8">Smart<span class="text-blue-600">Rent.</span></h1>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <select id="city" class="bg-slate-100 p-4 rounded-xl font-bold outline-none"></select>
+                    <select id="locality" class="bg-slate-100 p-4 rounded-xl font-bold outline-none"></select>
+                    <select id="bhk" class="bg-slate-100 p-4 rounded-xl font-bold outline-none">
+                        <option value="1">1 BHK</option><option value="2">2 BHK</option>
+                        <option value="3">3 BHK</option><option value="4">4 BHK</option>
+                    </select>
+                    <input type="number" id="area" placeholder="Sqft" class="bg-slate-100 p-4 rounded-xl font-bold outline-none">
+                </div>
+
+                <div class="mt-8 text-center">
+                    <button id="predict-btn" class="bg-slate-900 text-white px-10 py-4 rounded-full font-bold hover:scale-105 transition-all">Analyze Rent</button>
+                    
+                    <div id="ml-result" class="hidden mt-10 p-6 border-t animate-in fade-in slide-in-from-bottom-5">
+                        <p class="text-slate-400 font-bold uppercase text-xs tracking-widest">Market Value</p>
+                        <h2 id="rent-val" class="text-6xl font-black text-blue-600 my-4 italic"></h2>
+                        <button id="unlock-chat" class="bg-blue-50 text-blue-600 px-6 py-2 rounded-lg font-bold hover:bg-blue-600 hover:text-white transition-all">Talk to AI Strategist</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chat-container" class="hidden lg:col-span-7 bg-white rounded-3xl shadow-2xl border border-slate-200 h-[650px] flex flex-col overflow-hidden relative z-[50]">
+                <div class="p-4 bg-slate-50 border-b flex justify-between">
+                    <span class="font-black text-xs uppercase text-slate-400">AI Consultation Mode</span>
+                </div>
+                <div id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar"></div>
+                
+                <div class="p-4 bg-white border-t">
+                    <div class="relative flex items-center">
+                        <input type="text" id="user-input" autocomplete="off" placeholder="Type message..." 
+                               class="w-full bg-slate-100 p-4 pr-14 rounded-2xl border-2 border-transparent focus:border-blue-600 outline-none font-bold z-[100]">
+                        <button id="send-btn" class="absolute right-3 bg-blue-600 text-white p-3 rounded-xl z-[110]">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

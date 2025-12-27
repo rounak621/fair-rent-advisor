@@ -1,0 +1,20 @@
+.modern-input {
+    width: 100%; padding: 12px; background: #F1F5F9; border-radius: 12px;
+    border: 2px solid transparent; font-weight: 700; outline: none;
+}
+.modern-input:focus { border-color: #2563EB; background: white; }
+
+.primary-btn {
+    background: #0F172A; color: white; padding: 14px 40px; border-radius: 100px;
+    font-weight: 800; transition: 0.3s;
+}
+
+#user-input {
+    pointer-events: all !important;
+    cursor: text !important;
+    position: relative;
+    z-index: 999;
+}
+
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }

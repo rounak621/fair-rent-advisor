@@ -4,10 +4,8 @@ import re
 import os
 
 def clean_and_merge_data():
-    # File paths - Adjusted for 'src' folder execution context or project root
-    # We assume script is run from project root, but for safety lets use relative paths
-    # If run from project root: data/raw/...
-    
+
+
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     RAW_DIR = os.path.join(BASE_DIR, 'data', 'raw')
     PROCESSED_DIR = os.path.join(BASE_DIR, 'data', 'processed')
