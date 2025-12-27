@@ -1,0 +1,23 @@
+# Git & Docker
+.git
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv
+venv/
+env/
+
+# Data (Raw data might be large and unused in inference if model assumes processed data or artifacts exist)
+# We keep data/processed if the app needs to load it, or just models if inference is standalone. 
+# app/main.py loads 'locality_mapping.json' and 'rent_model_artifacts.pkl' from 'models/'.
+# It does NOT seem to load 'cleaned_rent_data.csv' directly.
+data/raw/
+
+# Config & Secrets
+.env
+.env.local

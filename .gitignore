@@ -1,0 +1,12 @@
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Data (Optional: exclude raw/processed if large, but here we keep them)
+# data/
+
+# Models (Optional)
+# models/

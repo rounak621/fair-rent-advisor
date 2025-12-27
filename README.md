@@ -1,17 +1,26 @@
 # AI-Assisted Rental Price Prediction & Fair Rent Advisor
 
 ## Overview
-This project predicts fair rental prices for properties in Delhi, Mumbai, and Pune using a Random Forest model. It also integrates Google Gemini to provide negotiation advice based on the predicted fair rent versus the owner's asking price.
+This project predicts fair rental prices for properties in Delhi, Mumbai, and Pune using a Gradient Boosting model. It also integrates Google Gemini to provide negotiation advice.
 
 ## Project Structure
-- `preprocess_data.py`: Merges and cleans the raw CSV data.
-- `train_model.py`: Trains the machine learning model and saves artifacts.
-- `app.py`: The main Streamlit web application.
-- `requirements.txt`: List of Python dependencies.
+```
+Rental Price Prediction/
+├── data/
+│   ├── raw/                  # Original CSVs
+│   └── processed/            # cleaned_rent_data.csv
+├── models/                   # Pickle files, JSON mappings
+├── src/                      # Source code
+│   ├── data_pipeline.py      # Preprocessing script
+│   └── model_training.py     # Training script
+├── app/                      # Streamlit app
+│   └── main.py              # Main application
+├── requirements.txt
+└── README.md
+```
 
 ## Prerequisites
 - Python 3.8+
-- A Google Gemini API Key
 
 ## Installation
 
@@ -22,24 +31,29 @@ This project predicts fair rental prices for properties in Delhi, Mumbai, and Pu
 
 ## Usage
 
-1.  **Prepare Data**:
-    (Skip if `cleaned_rent_data.csv` already exists)
+1.  **Prepare Data** (Optional if data exists):
     ```bash
-    python preprocess_data.py
+    python src/data_pipeline.py
     ```
 
-2.  **Train Model**:
-    (Skip if `rent_model_artifacts.pkl` and `locality_mapping.json` already exist)
+2.  **Train Model** (Optional if models exist):
     ```bash
-    python train_model.py
+    python src/model_training.py
     ```
 
 3.  **Run Application**:
     ```bash
-    python -m streamlit run app.py
+    python -m streamlit run app/main.py
     ```
 
-4.  **Using the App**:
-    - The app will open in your browser (usually at `http://localhost:8501`).
-    - Enter your **Gemini API Key** in the sidebar to enable the negotiation advice feature.
-    - Select City, Locality, and other property details to get a prediction.
+## Docker
+
+1.  **Build**:
+    ```bash
+    docker build -t rent-advisor .
+    ```
+
+2.  **Run**:
+    ```bash
+    docker run -p 8501:8501 rent-advisor
+    ```
