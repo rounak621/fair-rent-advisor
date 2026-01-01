@@ -5,3 +5,7 @@ streamlit
 plotly
 openai
 flask
+pymongo
+flask-pymongo 
+werkzeug 
+python-dotenv
