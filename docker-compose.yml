@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: smartrentai_app
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/smartrentai
+      - SECRET_KEY=${SECRET_KEY:-change-this-in-production}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    depends_on:
+      - mongo
+    volumes:
+      - ./models:/app/models:ro
+      - ./data:/app/data:ro
+
+  mongo:
+    image: mongo:7
+    container_name: smartrentai_mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=smartrentai
+
+volumes:
+  mongo_data:
