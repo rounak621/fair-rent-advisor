@@ -8,7 +8,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI=mongodb://mongo:27017/smartrentai
+      - MONGO_URI=${MONGO_URI}
       - SECRET_KEY=${SECRET_KEY:-change-this-in-production}
       - GEMINI_API_KEY=${GEMINI_API_KEY}
     depends_on:
